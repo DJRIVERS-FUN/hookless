@@ -2,7 +2,7 @@ import json
 import time
 import re
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from urllib.parse import urlparse
 
 from playwright.sync_api import sync_playwright
@@ -39,9 +39,9 @@ def extract_blocks(html):
     return blocks
 
 
-def scrape_page(page, url, config):
+def scrape_page(page, url, config, source_group):
     try:
-        page.goto(url, timeout=30000)
+        page.goto(url, timeout=60000)
         time.sleep(2)
         html = page.content()
 
@@ -74,26 +74,34 @@ def main():
         context = browser.new_context()
         page = context.new_page()
 
-        for url in tqdm(config["seed_urls"]):
-            matches = scrape_page(page, url, config)
+        for group in config["source_groups"]:
+            group_name = group["name"]
+            print(f"\nProcessing group: {group_name}")
 
-            for m in matches:
-                results.append({
-                    "url": url,
-                    "domain": urlparse(url).netloc,
-                    "text": m["text"],
-                    "terms": ",".join(m["terms"]),
-                    "timestamp": datetime.utcnow().isoformat()
-                })
+            for url in tqdm(group["seed_urls"]):
+                matches = scrape_page(page, url, config, group_name)
+
+                for m in matches:
+                    results.append({
+                        "source_group": group_name,
+                        "url": url,
+                        "domain": urlparse(url).netloc,
+                        "text": m["text"],
+                        "terms": ",".join(m["terms"]),
+                        "timestamp": datetime.now(timezone.utc).isoformat()
+                    })
 
         browser.close()
 
     with open("data/playwright_results.json", "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2)
 
-    pd.DataFrame(results).to_csv("data/playwright_results.csv", index=False)
+    df = pd.DataFrame(results)
+    df.to_csv("data/playwright_results.csv", index=False)
 
-    print(f"Saved {len(results)} records")
+    print(f"\nSaved {len(results)} records")
+    print("Source breakdown:")
+    print(df['source_group'].value_counts())
 
 
 if __name__ == "__main__":
