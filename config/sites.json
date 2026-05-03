@@ -1,0 +1,51 @@
+{
+  "project": "hookless-rim-media-discourse",
+  "description": "Extract mentions of hooked and hookless bicycle rim systems from cycling-related media pages.",
+  "user_agent": "HooklessRimResearchBot/0.1 (+https://www.damianrivers.com/lab/)",
+  "request_delay_seconds": 2.0,
+  "timeout_seconds": 20,
+  "respect_robots_txt": true,
+  "terms": [
+    "hookless rim",
+    "hookless rims",
+    "hooked rim",
+    "hooked rims",
+    "hooked wheel rim",
+    "hookless wheel rim",
+    "bead hook",
+    "bead hooks",
+    "straight side",
+    "straight-side",
+    "TSS",
+    "tubeless straight side"
+  ],
+  "domains": [
+    "bikeradar.com",
+    "cyclingnews.com",
+    "cyclist.co.uk",
+    "road.cc",
+    "velonews.com",
+    "pinkbike.com",
+    "bicycleretailer.com",
+    "gravelcyclist.com",
+    "cyclingweekly.com",
+    "escape.collective.com",
+    "singletracks.com",
+    "bikepacking.com",
+    "pezcyclingnews.com",
+    "cyclingreview.nl"
+  ],
+  "seed_urls": [
+    "https://www.cyclist.co.uk/in-depth/wheels/hookless-rims",
+    "https://www.boydcycling.com/hookless",
+    "https://www.gravelcyclist.com/bicycle-tech/the-hookless-bead-rim-how-it-works-who-theyre-for-by-enve-composites/",
+    "https://cyclingreview.nl/en/hooked-vs-hookless-rims-difference-explanation-2025/"
+  ],
+  "search_queries": [
+    "hookless rims road cycling safety",
+    "hooked rims hookless rims cycling media",
+    "hookless wheel rims tire blowoff cycling",
+    "hookless rims UCI review cycling",
+    "hookless rims 72.5 psi cycling"
+  ]
+}
