@@ -1,9 +1,9 @@
 {
   "project": "hookless-rim-media-discourse",
-  "description": "Extract mentions of hooked and hookless bicycle rim systems from cycling-related media pages.",
-  "user_agent": "HooklessRimResearchBot/0.1 (+https://www.damianrivers.com/lab/)",
+  "description": "Extract mentions of hooked and hookless bicycle rim systems from cycling media, manufacturer technical literature, and public forum/social sources.",
+  "user_agent": "HooklessRimResearchBot/0.2 (+https://www.damianrivers.com/lab/)",
   "request_delay_seconds": 2.0,
-  "timeout_seconds": 20,
+  "timeout_seconds": 30000,
   "respect_robots_txt": true,
   "terms": [
     "hookless rim",
@@ -12,40 +12,86 @@
     "hooked rims",
     "hooked wheel rim",
     "hookless wheel rim",
+    "hookless wheel",
+    "hooked wheel",
+    "hookless bead",
+    "hooked bead",
     "bead hook",
     "bead hooks",
     "straight side",
     "straight-side",
     "TSS",
-    "tubeless straight side"
+    "tubeless straight side",
+    "tubeless straight-side",
+    "rim hook",
+    "rim hooks",
+    "bead seat",
+    "maximum pressure",
+    "72.5 psi",
+    "5 bar"
   ],
-  "domains": [
-    "bikeradar.com",
-    "cyclingnews.com",
-    "cyclist.co.uk",
-    "road.cc",
-    "velonews.com",
-    "pinkbike.com",
-    "bicycleretailer.com",
-    "gravelcyclist.com",
-    "cyclingweekly.com",
-    "escape.collective.com",
-    "singletracks.com",
-    "bikepacking.com",
-    "pezcyclingnews.com",
-    "cyclingreview.nl"
-  ],
-  "seed_urls": [
-    "https://www.cyclist.co.uk/in-depth/wheels/hookless-rims",
-    "https://www.boydcycling.com/hookless",
-    "https://www.gravelcyclist.com/bicycle-tech/the-hookless-bead-rim-how-it-works-who-theyre-for-by-enve-composites/",
-    "https://cyclingreview.nl/en/hooked-vs-hookless-rims-difference-explanation-2025/"
+  "source_groups": [
+    {
+      "name": "manufacturer",
+      "description": "Manufacturer technical pages, support pages, white papers, and product literature.",
+      "seed_urls": [
+        "https://www.sram.com/en/zipp/campaigns/hookless-tire-compatibility",
+        "https://www.sram.com/en/zipp/campaigns/tire-pressure-guide",
+        "https://www.sram.com/en/zipp/road/series/303-firecrest-tubeless-disc-brake",
+        "https://www.sram.com/en/zipp/road/series/353-nsw-tubeless-disc-brake",
+        "https://www.dtswiss.com/en/wheels/wheels-technology/tubeless-technology",
+        "https://www.enve.com/learn/hookless-rims/",
+        "https://www.boydcycling.com/hookless",
+        "https://reservewheels.com/pages/hookless-rims",
+        "https://www.giant-bicycles.com/global/hookless-technology",
+        "https://www.cadex-cycling.com/global/hookless-technology"
+      ]
+    },
+    {
+      "name": "cycling_media",
+      "description": "Cycling media articles and technical explainers.",
+      "seed_urls": [
+        "https://www.cyclist.co.uk/in-depth/wheels/hookless-rims",
+        "https://www.gravelcyclist.com/bicycle-tech/the-hookless-bead-rim-how-it-works-who-theyre-for-by-enve-composites/",
+        "https://cyclingreview.nl/en/hooked-vs-hookless-rims-difference-explanation-2025/",
+        "https://road.cc/content/feature/should-you-be-worried-about-hookless-rims-307445",
+        "https://www.bikeradar.com/advice/buyers-guides/hookless-rims",
+        "https://www.cyclingnews.com/features/hookless-rims-explained/",
+        "https://www.cyclingweekly.com/products/hookless-rims-explained"
+      ]
+    },
+    {
+      "name": "forum_social_public",
+      "description": "Publicly accessible forum/social discussion pages. Do not bypass login, paywalls, or anti-bot restrictions.",
+      "seed_urls": [
+        "https://www.reddit.com/r/cycling/search/?q=hookless%20rim&restrict_sr=1",
+        "https://www.reddit.com/r/Velo/search/?q=hookless%20rim&restrict_sr=1",
+        "https://weightweenies.starbike.com/forum/search.php?keywords=hookless+rim",
+        "https://www.trainerroad.com/forum/search?q=hookless%20rim",
+        "https://www.mtbr.com/search/84166/?q=hookless+rim&o=relevance",
+        "https://www.bikeforums.net/search.php?do=process&query=hookless+rim"
+      ]
+    },
+    {
+      "name": "standards_policy",
+      "description": "Standards, safety, and institutional references where accessible.",
+      "seed_urls": [
+        "https://www.uci.org/pressrelease/uci-statement-on-hookless-rims/",
+        "https://www.iso.org/standard/79600.html",
+        "https://www.etrto.org/"
+      ]
+    }
   ],
   "search_queries": [
     "hookless rims road cycling safety",
     "hooked rims hookless rims cycling media",
     "hookless wheel rims tire blowoff cycling",
     "hookless rims UCI review cycling",
-    "hookless rims 72.5 psi cycling"
+    "hookless rims 72.5 psi cycling",
+    "site:sram.com zipp hookless rim tire compatibility",
+    "site:dtswiss.com hookless rim tubeless",
+    "site:enve.com hookless rims",
+    "site:reddit.com/r/cycling hookless rim",
+    "site:trainerroad.com/forum hookless rim"
   ]
 }
